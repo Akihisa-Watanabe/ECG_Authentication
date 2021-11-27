@@ -1,2 +1,7 @@
 # ECG_Authentication
- ECGを用いた生体認証
+## Data Acquisition
+## Data Preprocessing
+## Feature Extraction
+## Classification
+## Evaluation
+

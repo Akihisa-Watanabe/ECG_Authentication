@@ -25,7 +25,7 @@ RAW_FILES=glob.glob("data/raw/*.csv")
 for file in RAW_FILES:
     data_id = re.findall("data/raw/raw_(.*).csv",file)[0] 
     raw_ecg = read_data(file)
-    cleaned_ecg, rpeaks = signal_process.preprocessing(raw_ecg,fs=Fs,pipline_method="elgendi2010",graph_show=np.False_)
+    cleaned_ecg, rpeaks = signal_process.preprocessing(raw_ecg,fs=Fs,pipline_method="elgendi2010",graph_show=False)
     segment_data = signal_process.get_segmentation(cleaned_ecg,rpeaks,fs=Fs,graph_show=False)
     signal_process.feature_extraction(data_id,segment_data,fs=Fs,save=False)
 

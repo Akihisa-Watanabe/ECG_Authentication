@@ -70,7 +70,7 @@ as in reference [^2]. The functions to compute these features are implemented in
 
 We used the template matching method for the authentication process. The average value of the Fiducial Point feature (QRS waveform) at each time was used as the signal template. The similarity between the signal template and the signal representation was calculated through DTW distance. These authentication processes are implemented in `create_template.py` and `authentication.py`. However, you should be aware of a few things about the `get_dtw` function in `autenticaiton.py`. First, the DTW distance is normalized by the longer of the two signals being compared. Furthermore, the similarity is implemented as follows
 
-<a href="https://www.codecogs.com/eqnedit.php?latex=similarity&space;=&space;(1-DTW&space;distance)\times&space;100&space;\quad&space;[\%]" target="_blank"><img src="https://latex.codecogs.com/gif.latex?similarity&space;=&space;(1-DTW&space;distance)\times&space;100&space;\quad&space;[\%]" title="similarity = (1-DTW distance)\times 100 \quad [\%]" /></a>
+![similarity = (1-DTW distance)\times 100 \quad [\%]](https://latex.codecogs.com/gif.latex?similarity&space;=&space;(1-DTW&space;distance)\times&space;100&space;\quad&space;[\%])
 
 When you run `main.py`, you will see the  DTW based similarity sorted in descending order. The top one is the user who has the highest similarity to the template. In the case shown below, all authentication is successful. For example, when user1 is the template, the similarity with the test data of user1 is 98.74%, which is higher than the test data of other users.
 

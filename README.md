@@ -3,7 +3,9 @@ We  implemented user authentication using ECG acquired from a heart rate sensor.
 ## How to start
 First, please prepare the ECG data by referring to the Data Acquisition chapter below. Second, please run the python script `main.py`.
 
-`python3 main.py`
+```
+$ python3 main.py
+```
 
 As a result, the terminal will display the authentication results as shown below.For the meaning of the authentication result, please read the Authentication chapter. In addition, each process of authentication saves the calculation results in its own directory.
 

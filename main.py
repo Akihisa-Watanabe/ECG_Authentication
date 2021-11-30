@@ -5,6 +5,7 @@ import signal_process
 import create_template
 import authentication
 import pandas as pd
+import json
 
 
 AMP_COEF = 5.0 / 1023 #AD変換係数
@@ -36,6 +37,36 @@ for file in FEATURE_FILES:
         data_id = re.findall("data/features/features_(.*).json",file)[0] 
         features = pd.read_json(file)
         template = create_template.create_template(features,feature_name)
-        print(data_id)
         save_file = "data/templates/template_" + data_id + ".csv"
         np.savetxt(save_file, template, delimiter=',',fmt='%.18f')
+
+
+TEMPLATE_FILES = glob.glob("data/templates/*.csv")
+AUTH_FILES = glob.glob("data/features/*_[!0].json")
+result={}
+
+for template_file in TEMPLATE_FILES:
+    template = np.loadtxt(template_file)
+    template_id = re.findall("data/templates/template_(.*).csv",template_file)[0]
+    scores={}
+    for auth_file in AUTH_FILES:
+        auth_id = re.findall("data/features/features_(.*).json",auth_file)[0] 
+        df_auth = pd.read_json(auth_file)
+        score = authentication.get_DTW(df_auth,template,feature_name)
+        scores[auth_id] = score
+    scores=sorted(scores.items(), key=lambda x: x[1],reverse=True)
+    result[template_id] = scores
+
+for template in result.keys():
+    template_user = re.findall("(.*)_0",template)[0] 
+    print("template : {0}\n".format(template_user))
+    print("test user : score")
+    for user_score in result[template]:
+        test_user = re.findall("(.*)_[1-9]+",user_score[0])[0] 
+        score = user_score[1]
+        print("{0} : {1} [%]".format(test_user,score))
+    print("-------------------")
+
+result_path ="data/result/result.json"
+with open(result_path, 'w') as fp:
+    json.dump(result, fp)

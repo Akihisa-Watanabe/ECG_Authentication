@@ -1,6 +1,6 @@
 # ECG_Authentication
 We  implemented user authentication using ECG acquired from a heart rate sensor. The authentication pipeline mainly contains four parts: data acquisition, data preprocessing, feature extraction and authentication(classification).
-## How to start
+## Getting Started
 First, please prepare the ECG data by referring to the Data Acquisition chapter below. Second, please run the python script `main.py`.
 
 ```

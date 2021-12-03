@@ -8,7 +8,7 @@ import pandas as pd
 import json
 
 
-AMP_COEF = 5.0 / 1023 #AD変換係数
+AMP_COEF = 5.0 / 1024 #AD変換係数
 Fs = 200  #サンプリング周波数513.367
 dt = 1/Fs #サンプリング周期
 N_MFCC = 20 #MFCCの次元数
@@ -26,6 +26,7 @@ RAW_FILES=glob.glob("data/raw/*.csv")
 for file in RAW_FILES:
     data_id = re.findall("data/raw/raw_(.*).csv",file)[0] 
     raw_ecg = read_data(file)
+    raw_ecg -= np.mean(raw_ecg)
     cleaned_ecg, rpeaks = signal_process.preprocessing(raw_ecg,fs=Fs,pipline_method="elgendi2010",graph_show=False)
     segment_data = signal_process.get_segmentation(cleaned_ecg,rpeaks,fs=Fs,graph_show=False)
     signal_process.feature_extraction(data_id,segment_data,fs=Fs,save=False)

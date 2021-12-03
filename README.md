@@ -52,7 +52,11 @@ data
 ## Data Preprocessing
 >Data preprocessing module is applied to filter high-frequency noise and segment signals into periodic cycles.The first step in data preprocessing is signal filtering, which filters the high frequency noise caused by unstable measurement circum stances in the signal capturing stage. Then, filtered signals are segmented into cycles with the same time interval.  [^1]
 
-We constructed our preprocessing, segmentation, and validation pipelines around the Python library [neurokit](https://github.com/neuropsychology/NeuroKit). The code for these operations can be found in `signal_process.py`.
+We constructed our preprocessing, segmentation, and validation pipelines around the Python library [neurokit](https://github.com/neuropsychology/NeuroKit). The code for these operations can be found in `signal_process.py`. The `preprocess` and `get_segment` functions in `signalprocess.py `have an argument `graph_show` which, if set to True, will display the following graphs. These graphs are provided by the neurokit library.
+
+![image](https://user-images.githubusercontent.com/57210762/144546889-278e9612-5db3-4f67-865d-fd4065d31861.png)
+
+![image](https://user-images.githubusercontent.com/57210762/144546565-1103f9bf-6b8a-46c9-839c-4f7f2fc333d1.png)
 
 ## Feature Extraction
 >Feature extraction module aims to extract useful features for classification[^1].
